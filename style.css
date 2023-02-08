@@ -1,0 +1,40 @@
+body {
+    position: relative;
+}
+
+.container {
+    display: inline-block;
+    border: 1px solid black;
+    height: 400px;
+    min-width: 150px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.container2 {
+    margin-left: 20px;
+    z-index: 0;
+}
+
+.box {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    z-index: 1;
+}
+
+.spot {
+    width: 100px;
+    height: 100px;
+    padding: 4px;
+    margin: 12px;
+    border: 1px solid black;
+}
+
+.spot:last-child {
+    margin-bottom: 100%;
+}
+
+.spotHover {
+    border-style: dashed;
+}

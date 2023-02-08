@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="prodej, kola, superkola" >
+    <title>Rozcestník</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+        }
+
+        .navbar > ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .navbar li {
+            float: left;
+        }
+
+        .navbar li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar li:nth-last-child(-n + 3) {
+            float: right;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .active {
+            background-color: #04AA6D;
+        }
+
+        main {
+            height: 3000px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            display: grid;
+            grid-template-areas: 
+            "heading heading"
+            "mapa kontakty"
+            "credits credits";
+            grid-template-columns: auto;
+        }
+
+        .footer-heading {
+            grid-area: heading;
+            text-align: center;
+        }
+
+        .mapa {
+            grid-area: mapa;
+            height: 300px;
+            width: 500px;
+        }
+
+        .kontakty {
+            grid-area: kontakty;
+            align-self: center;
+        }
+
+        .kontakty > ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .credits {
+            grid-area: credits;
+            text-align: center;
+            background-color: #111;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="customDrag.html">Custom</a></li>
+                <li><a href="dragAPI.html">API</a></li>
+                <li><a href="sortable.html">Sortable</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        
+    </main>
+    <footer>
+        <h3 class="footer-heading">Kontaktujte mě</h3>
+        <div class="mapa"></div>
+        <div class="kontakty">
+            <ul>
+                <li><a href="mailto:svobodapetr803@gmail.com">svobodapetr803@gmail.com</a></li>
+                <li><a href="tel:+420730123456">+420 730 123 456</a></li>
+                <li>Liberec 46001, Masarykova 5</li>
+            </ul>
+        </div>
+        <div class="credits">Autorem je Petr Svoboda</div>
+    </footer>
+    <script>
+        let links = document.querySelectorAll("a")
+        for (const key in links) {
+            if (Object.hasOwnProperty.call(links, key)) {
+                const link = links[key];
+                link.addEventListener("click", () => {
+                    links.forEach((e) => e.classList.remove("active"))
+                    if(!link.classList.contains("active")) link.classList.add("active")
+                })
+            }
+        }
+    </script>
+</body>
+</html>
