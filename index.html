@@ -5,10 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="prodej, kola, superkola" >
+    <script src="https://api.mapy.cz/loader.js"></script>
+	<script>Loader.load()</script>
     <title>Rozcestník</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 48
+        }
+
         body {
             margin: 0;
+            font-family: 'Roboto', sans-serif;
         }
 
         header {
@@ -40,7 +54,7 @@
             float: right;
         }
 
-        li a:hover:not(.active) {
+        nav li a:hover:not(.active) {
             background-color: #111;
         }
 
@@ -61,6 +75,7 @@
             "mapa kontakty"
             "credits credits";
             grid-template-columns: auto;
+            grid-auto-columns: 50%;
         }
 
         .footer-heading {
@@ -71,12 +86,21 @@
         .mapa {
             grid-area: mapa;
             height: 300px;
-            width: 500px;
+            width: 100%;
+            margin-left: 15px;
+        }
+
+        #mapa {
+            border-radius: 10px;
+            height: 100%;
+            width: 100%;
+            box-shadow: #111 10px 10px 3px;
         }
 
         .kontakty {
             grid-area: kontakty;
             align-self: center;
+            margin: auto;
         }
 
         .kontakty > ul {
@@ -85,10 +109,31 @@
             padding: 0;
         }
 
+        .kontakty > ul > li {
+            margin: 50px 0;
+        }
+
+        .kontakty li span {
+            vertical-align: middle;
+        }
+
+        .kontakty a {
+            all: unset;
+        }
+
+        .kontakty li:hover {
+            text-decoration: underline;
+        }
+
+        .kontakty li span {
+            font-size: 19px;
+        }
+
         .credits {
             grid-area: credits;
             text-align: center;
             background-color: #111;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -111,17 +156,17 @@
     </main>
     <footer>
         <h3 class="footer-heading">Kontaktujte mě</h3>
-        <div class="mapa"></div>
+        <div class="mapa"><div id="mapa"></div></div>
         <div class="kontakty">
             <ul>
-                <li><a href="mailto:svobodapetr803@gmail.com">svobodapetr803@gmail.com</a></li>
-                <li><a href="tel:+420730123456">+420 730 123 456</a></li>
-                <li>Liberec 46001, Masarykova 5</li>
+                <li><a href="mailto:svobodapetr803@gmail.com"><span class="material-symbols-outlined">mail</span>svobodapetr803@gmail.com</a></li>
+                <li><a href="tel:+420730123456"><span class="material-symbols-outlined">call</span>+420 730 123 456</a></li>
+                <li><span class="material-symbols-outlined">location_on</span><span>Liberec 46001, Masarykova 5</span></li>
             </ul>
         </div>
         <div class="credits">Autorem je Petr Svoboda</div>
     </footer>
-    <script>
+    <script type="text/javascript">
         let links = document.querySelectorAll("a")
         for (const key in links) {
             if (Object.hasOwnProperty.call(links, key)) {
@@ -132,6 +177,22 @@
                 })
             }
         }
+
+        let stred = SMap.Coords.fromWGS84(15.0584486, 50.7699972);
+        let mapa = new SMap(JAK.gel("mapa"), stred, 13);
+        mapa.addDefaultLayer(SMap.DEF_BASE).enable();
+        mapa.addDefaultControls();
+
+        let sync = new SMap.Control.Sync({bottomSpace:30});
+        mapa.addControl(sync);
+
+        var layer = new SMap.Layer.Marker();
+        mapa.addLayer(layer);
+        layer.enable();
+
+        var options = {};
+        var marker = new SMap.Marker(stred, "myMarker", options);
+        layer.addMarker(marker);
     </script>
 </body>
 </html>
